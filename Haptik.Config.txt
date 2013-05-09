@@ -1,0 +1,59 @@
+Delta.LeftHanded	=	FALSE
+Delta.MaxForce	=	10.000000
+Delta.XOffset	=	0.0
+Delta.YOffset	=	0.0
+Delta.ZOffset	=	0.0
+
+Freedom.LeftHanded = FALSE
+Freedom.MaxForce = 10.000
+
+HaptikLibrary.numberOfPlugins	=	5
+HaptikLibrary.plugin0_0	=	Haptik.Falcon.dll
+HaptikLibrary.plugin0_1	=	Haptik.Phantom42.dll
+HaptikLibrary.plugin0_2	=	Haptik.Phantom40.dll
+HaptikLibrary.plugin0_3 =	Haptik.Phantom31.dll
+HaptikLibrary.plugin1_0	=	Haptik.Delta.dll
+HaptikLibrary.plugin2_0	=	Haptik.Freedom.dll
+HaptikLibrary.plugin3_0	=	Haptik.Remote.dll
+HaptikLibrary.plugin4_0	=	Haptik.Spectre.dll
+HaptikLibrary.allowMessageBoxes = FALSE
+HaptikLibrary.preventSplashScreen = TRUE
+
+MouseSpectre.Scale.force	=	1.000000
+MouseSpectre.Scale.moveX	=	1.000000
+MouseSpectre.Scale.moveY	=	1.000000
+MouseSpectre.Scale.moveZ	=	1.000000
+MouseSpectre.Scale.rotateX	=	1.000000
+MouseSpectre.Scale.rotateY	=	1.000000
+MouseSpectre.Scale.rotateZ	=	1.000000
+
+MouseSpectre.Starting.PositionX	=	0.000000
+MouseSpectre.Starting.PositionY	=	0.000000
+MouseSpectre.Starting.PositionZ	=	0.000000
+
+MouseSpectre.Window.ForwardKeyMessages	=	FALSE
+MouseSpectre.Window.Opacity	=	0.800000
+MouseSpectre.Window.PersistentClicks	=	FALSE
+MouseSpectre.Window.PositionX	=	10
+MouseSpectre.Window.PositionY	=	10
+MouseSpectre.Window.Transparent	=	FALSE
+MouseSpectre.Window.UpdateFrequency	=	25.000000
+
+MouseSpectre.Workspace.maxX	=	100.000000
+MouseSpectre.Workspace.maxY	=	100.000000
+MouseSpectre.Workspace.maxZ	=	100.000000
+MouseSpectre.Workspace.minX	=	-100.000000
+MouseSpectre.Workspace.minY	=	-100.000000
+MouseSpectre.Workspace.minZ	=	-100.000000
+
+MouseSpectre.Frequency	=	1000.000000
+MouseSpectre.LeftHanded	=	FALSE
+MouseSpectre.MaxForce	=	10.000000
+
+Phantom.LeftHanded	=	FALSE
+Phantom.MaxForce	=	10.000000
+
+Remote.Port	=	60000
+Remote.Address = majorana
+
+

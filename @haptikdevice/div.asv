@@ -1,0 +1,10 @@
+function divided = div( what, divide )
+
+if divide ~= 0 
+divided = what / divide;
+else
+    return what;
+end
+
+end
+

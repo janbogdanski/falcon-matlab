@@ -1,0 +1,54 @@
+[Haptik.Library] VERBOSE: Version 1.2.32.1050.20120218
+[Haptik.Library] VERBOSE: Loaded from C:\Program Files\Siena Robotics and Systems Lab\Haptik Library\Development\Bin\Haptik.Library.dll
+[Haptik.Library] VERBOSE: 05/08/13 17:07:32
+[Haptik.Library] SUCCESS: Loaded G:\programy\Dropbox\falcon\Haptik Library\Matlab\Haptik.Config.txt from working directory
+[Haptik.Library] VERBOSE: Haptik HKLM Registry Key not Found
+[Haptik.Library] SUCCESS: Loaded Haptik.Falcon.dll
+[Haptik.Falcon] VERBOSE: 1.0.7.106.20120218
+[Haptik.Falcon] VERBOSE: HDL 2.1 Serial: 3
+[Haptik.Library] WARNING: no devices exposed by Haptik.Falcon.dll
+[Haptik.Library] FAILURE: Failed to load Haptik.Delta.dll
+[Haptik.Library] VERBOSE:  Nie mo¿na odnaleŸæ okreœlonego modu³u.
+[Haptik.Library] VERBOSE: Trying Fallbacks
+[Haptik.Library] VERBOSE: No more fallbacks... plugin skipped
+[Haptik.Library] FAILURE: Failed to load Haptik.Freedom.dll
+[Haptik.Library] VERBOSE:  Nie mo¿na odnaleŸæ okreœlonego modu³u.
+[Haptik.Library] VERBOSE: Trying Fallbacks
+[Haptik.Library] VERBOSE: No more fallbacks... plugin skipped
+[Haptik.Library] SUCCESS: Loaded Haptik.Remote.dll
+[Haptik.Library] FAILURE: Haptik.Remote.dll failed to initialize
+[Haptik.Library] VERBOSE: Trying Fallbacks
+[Haptik.Library] VERBOSE: No more fallbacks... plugin skipped
+[Haptik.Library] SUCCESS: Loaded Haptik.Spectre.dll
+[Haptik.Spectre] VERBOSE: 1.1.17.861.20071009
+[Haptik.Spectre] VERBOSE: Found "Mouse Spectre 0" device
+[Haptik.Falcon] VERBOSE: Interface Requested for device: 0x80FFFFFF
+[Haptik.Falcon] WARNING: Requested device not found
+[Haptik.Spectre] VERBOSE: Interface Requested for device: 0x80FFFFFF
+[Haptik.Spectre] VERBOSE: Found "Mouse Spectre 1" device
+[Haptik.Spectre] VERBOSE: Returning interface for device: 0x80018001
+[Haptik.Spectre] VERBOSE: Init Complete
+[Haptik.Falcon] VERBOSE: Interface Requested for device: 0x80FFFFFF
+[Haptik.Falcon] WARNING: Requested device not found
+[Haptik.Spectre] VERBOSE: Interface Requested for device: 0x80FFFFFF
+[Haptik.Spectre] VERBOSE: Returning interface for device: 0x80018001
+[Haptik.Spectre] VERBOSE: Init Complete
+[Haptik.Falcon] VERBOSE: Interface Requested for device: 0x80FFFFFF
+[Haptik.Falcon] WARNING: Requested device not found
+[Haptik.Spectre] VERBOSE: Interface Requested for device: 0x80FFFFFF
+[Haptik.Spectre] VERBOSE: Returning interface for device: 0x80018001
+[Haptik.Spectre] VERBOSE: Init Complete
+[Haptik.Falcon] VERBOSE: Interface Requested for device: 0x80FFFFFF
+[Haptik.Falcon] WARNING: Requested device not found
+[Haptik.Spectre] VERBOSE: Interface Requested for device: 0x80FFFFFF
+[Haptik.Spectre] VERBOSE: Returning interface for device: 0x80018001
+[Haptik.Spectre] VERBOSE: Init Complete
+[Haptik.Falcon] VERBOSE: Interface Requested for device: 0x80FFFFFF
+[Haptik.Falcon] WARNING: Requested device not found
+[Haptik.Spectre] VERBOSE: Interface Requested for device: 0x80FFFFFF
+[Haptik.Spectre] WARNING: Requested device is already being used or not available
+[Haptik.Spectre] VERBOSE: Found "Mouse Spectre 2" device
+[Haptik.Spectre] VERBOSE: Returning interface for device: 0x81018001
+[Haptik.Spectre] VERBOSE: Init Complete
+[Haptik.Library] WARNING: Cannot detect calling module. Plugin unloading will be delayed for safety
+[Haptik.Library] VERBOSE: Unloading...
