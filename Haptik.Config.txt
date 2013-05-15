@@ -39,12 +39,12 @@ MouseSpectre.Window.PositionY	=	10
 MouseSpectre.Window.Transparent	=	FALSE
 MouseSpectre.Window.UpdateFrequency	=	25.000000
 
-MouseSpectre.Workspace.maxX	=	100.000000
-MouseSpectre.Workspace.maxY	=	100.000000
-MouseSpectre.Workspace.maxZ	=	100.000000
-MouseSpectre.Workspace.minX	=	-100.000000
-MouseSpectre.Workspace.minY	=	-100.000000
-MouseSpectre.Workspace.minZ	=	-100.000000
+MouseSpectre.Workspace.maxX	=	50.000000
+MouseSpectre.Workspace.maxY	=	50.000000
+MouseSpectre.Workspace.maxZ	=	50.000000
+MouseSpectre.Workspace.minX	=	-50.000000
+MouseSpectre.Workspace.minY	=	-50.000000
+MouseSpectre.Workspace.minZ	=	-50.000000
 
 MouseSpectre.Frequency	=	1000.000000
 MouseSpectre.LeftHanded	=	FALSE
