@@ -1,15 +1,15 @@
 %get a device
+matlabrc;
 h = haptikdevice;
-figure(1);
-lHandle = line(nan, nan);
+
 %run simulation for 10 seconds
 tic
 while toc < 10
     
     %read probe position
     pos = read_position(h);
-    set(lHandle,  pos(0), pos(1));
-    drawnow;
+
+
     %check for collision and send back force feedback
     if pos(2)<0
         write(h, -1 * [0 pos(2) 0]);
@@ -20,5 +20,6 @@ while toc < 10
 end
 
 close(h);
-clear h
+clear h;
+clear pos;
 
