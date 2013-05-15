@@ -2,4 +2,5 @@ asd/*
 fem/*
 *.log
 *.asv
-
+test.m
+Haptic.Log.txt
