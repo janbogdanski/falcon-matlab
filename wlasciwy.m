@@ -81,9 +81,11 @@ while toc < 120
         if(contact == 1)
 
 
-            Q = 3 * y * E*I / (x^3);
+            Q = 3 * y * E*I / (x^3); % y => w, x => l
             w = Q*dx.^3/(3*E*I);
-            apply_force(h,-Q);
+            [Q, F toc];
+            
+            
 
 
             [sign(y) abs(belka(Q,x)), eps, x,Q];
@@ -97,6 +99,8 @@ while toc < 120
                     konto = 0
                     [abs((belka(Q,x))), last_trend_in, trend, (last_trend_in == -trend)];
                 end
+            else
+                apply_force(h,-Q);
             end
 
             %F = 100;
@@ -106,6 +110,7 @@ while toc < 120
             %wsp, sila na 'koncu'
             %w = F*dx.^3/(3*E*I);
         else
+            apply_force(h,0);
             elsekontakt = 0;
             dx = 0:0.001:l;
             w = dx *0;
