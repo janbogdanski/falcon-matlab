@@ -42,81 +42,74 @@ while toc < 120
     z = pos(3) /1000;
 
     if (x < l) && (x > 0)
-        
+        %F = m * ((y - yold)/(toc - told) - yold)/(toc - told)
 
        dx = 0.0:.001:x; 
-           ynew = y;
-    
-    %F = m * ((y - yold)/(toc - told) - yold)/(toc - told)
-    dy = y - yold;
-    dt = toc - told;
-    
-    v = div(dy,dt);
-    a = div(v, dt);
+       ynew = y;
+       
+        dy = y - yold;
+        dt = toc - told;
 
-    F = m * a;
-    
-    if(sign(dy) ~=0)
-        trend = sign(dy);
-    end
-    
+        v = div(dy,dt);
+        a = div(v, dt);
+
+        F = m * a;
+
+        if(sign(dy) ~=0)
+            trend = sign(dy);
+        end
+
         if contact == 0 && sign(dy) ~= 0
             trend_in = sign(dy);
             [trend_in toc];
         end
-        
-    %zderzenie
-    if(abs(y - belka(F,x)) < eps) && (contact == 0)
-        if(last_trend_in ~= 0  && last_trend_in == trend) || last_trend_in == 0
-                 
-            contact = 1;
-            trend_in = trend;
-            last_trend_in = trend;
-       
+
+        %zderzenie
+        if(abs(y - belka(F,x)) < eps) && (contact == 0)
+            if(last_trend_in ~= 0  && last_trend_in == trend) || last_trend_in == 0
+
+                contact = 1;
+                trend_in = trend;
+                last_trend_in = trend;
+
+            end
+        else
+            %contact = 0;
         end
-        
-       
-         
-            
-    else
-        %contact = 0;
-    end
-
-    
-    if(contact == 1)
-  
-        
-        Q = 3 * y * E*I / (x^3);
-        w = Q*dx.^3/(3*E*I);
-        apply_force(h,-Q);
 
 
-        [sign(y) abs(belka(Q,x)), eps, x,Q]
-            
-            
-        if (abs(belka(Q,x)) < eps)
-        
-            if(last_trend_in ~= 0  && last_trend_in == -trend) || last_trend_in == 0
+        if(contact == 1)
 
-            contact = 0;
-            konto = 0
-            [abs((belka(Q,x))), last_trend_in, trend, (last_trend_in == -trend)]
+
+            Q = 3 * y * E*I / (x^3);
+            w = Q*dx.^3/(3*E*I);
+            apply_force(h,-Q);
+
+
+            [sign(y) abs(belka(Q,x)), eps, x,Q];
+
+
+            if (abs(belka(Q,x)) < eps)
+
+                if(last_trend_in ~= 0  && last_trend_in == -trend) || last_trend_in == 0
+
+                    contact = 0;
+                    konto = 0
+                    [abs((belka(Q,x))), last_trend_in, trend, (last_trend_in == -trend)];
+                end
             end
 
+            %F = 100;
+            %wspornikowa
+            %w = 5*F*l^2/(24*E*I) * dx.^2 -  F*l/(12*E*I) * dx.^3;
 
+            %wsp, sila na 'koncu'
+            %w = F*dx.^3/(3*E*I);
+        else
+            elsekontakt = 0;
+            dx = 0:0.001:l;
+            w = dx *0;
         end
-        
-        %F = 100;
-        %wspornikowa
-        %w = 5*F*l^2/(24*E*I) * dx.^2 -  F*l/(12*E*I) * dx.^3;
-
-        %wsp, sila na 'koncu'
-        %w = F*dx.^3/(3*E*I);
-    else
-        elsekontakt = 0;
-        dx = 0:0.001:l;
-        w = dx *0;
-    end
 %if length(w) >= 1
 %    last = w(end-1);
 %else
@@ -167,8 +160,7 @@ while toc < 120
           count=count+1;
           yold = ynew;
           told = toc;
-end;
-
+end
           plot(dx,w);
           hold on
           plot(x,y,'*');
