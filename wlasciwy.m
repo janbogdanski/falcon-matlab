@@ -29,6 +29,8 @@ figure
 ret = [];
 contact = 0;
 trend = 0;
+trend_in = 0;
+last_trend_in = 0;
 
 tic
 while toc < 120
@@ -41,8 +43,7 @@ while toc < 120
 
     if (x < l) && (x > 0)
         
-        
-        
+
        dx = 0.0:.001:x; 
            ynew = y;
     
@@ -55,33 +56,56 @@ while toc < 120
 
     F = m * a;
     
-    if(abs(y - belka(F,x)) < eps)
+    if(sign(dy) ~=0)
+        trend = sign(dy);
+    end
+    
+        if contact == 0 && sign(dy) ~= 0
+            trend_in = sign(dy);
+            [trend_in toc];
+        end
         
+    %zderzenie
+    if(abs(y - belka(F,x)) < eps) && (contact == 0)
+        if(last_trend_in ~= 0  && last_trend_in == trend) || last_trend_in == 0
+                 
             contact = 1;
-            trend = sign(F);
+            trend_in = trend;
+            last_trend_in = trend;
+       
+        end
+        
+       
+         
             
     else
         %contact = 0;
     end
-trend;
+
     
     if(contact == 1)
-        
-
+  
         
         Q = 3 * y * E*I / (x^3);
         w = Q*dx.^3/(3*E*I);
         apply_force(h,-Q);
 
 
-   [trend sign(y) abs(belka(Q,x)), eps, x,Q]
-            
+        [sign(y) abs(belka(Q,x)), eps, x,Q]
             
             if (abs((belka(Q,x)) < eps))
-                contact = 0;
-                konto = 0
             
+        
+            if(last_trend_in ~= 0  && last_trend_in == -trend) || last_trend_in == 0
+
+            contact = 0;
+            konto = 0
+            [abs((belka(Q,x))), last_trend_in, trend, (last_trend_in == -trend)]
             end
+
+
+        end
+        
         %F = 100;
         %wspornikowa
         %w = 5*F*l^2/(24*E*I) * dx.^2 -  F*l/(12*E*I) * dx.^3;
@@ -89,6 +113,7 @@ trend;
         %wsp, sila na 'koncu'
         %w = F*dx.^3/(3*E*I);
     else
+        elsekontakt = 0;
         dx = 0:0.001:l;
         w = dx *0;
     end
@@ -115,6 +140,7 @@ trend;
 
     else
         contact = 0;
+        last_trend_in = 0;
         dx = 0:0.001:l;
         w = dx *0;
     end
