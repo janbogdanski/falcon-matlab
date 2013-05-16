@@ -93,8 +93,8 @@ while toc < 120
 
         [sign(y) abs(belka(Q,x)), eps, x,Q]
             
-            if (abs((belka(Q,x)) < eps))
             
+        if (abs(belka(Q,x)) < eps)
         
             if(last_trend_in ~= 0  && last_trend_in == -trend) || last_trend_in == 0
 
