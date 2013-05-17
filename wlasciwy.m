@@ -31,9 +31,11 @@ contact = 0;
 trend = 0;
 trend_in = 0;
 last_trend_in = 0;
+last_Q = 0;
+force_scale = 4000; %tyle razy mniejsza sila generowana niz obliczona
 
 tic
-while toc < 120
+while toc < 60
     
     t = toc;
     pos = read_position(h);
@@ -73,8 +75,18 @@ while toc < 120
                 last_trend_in = trend;
 
             end
-        else
+        elseif (abs(y - belka(F,x)) > eps && (yold ~= 0) && y~=0 && (sign(yold) ~= sign(y)) && (contact == 0))
+            %gdy duza predkosc, na razie slabe, bo zostaje w kontakcie po
+            %obu stronach( na nowo lapie)
+            
+            %contact = 1;
+            %trend_in = trend;
+            %last_trend_in = trend;
+            %[yold, y, abs(y - belka(F,x)), eps]
+            
             %contact = 0;
+        else
+            %null;
         end
 
 
@@ -83,6 +95,7 @@ while toc < 120
 
             Q = 3 * y * E*I / (x^3); % y => w, x => l
             w = Q*dx.^3/(3*E*I);
+            wprim = Q*dx.^2/(2*E*I);
             [Q, F toc];
             
             
@@ -91,17 +104,24 @@ while toc < 120
             [sign(y) abs(belka(Q,x)), eps, x,Q];
 
 
-            if (abs(belka(Q,x)) < eps)
+            %empirycznie dobrany wspolczynnik, > 1 zapobiega drganiom
+            %manipulatora w okolicy pol rownowagi i zapewnia ciaglosc
+            %kontaktu z belka
+            %zbyt duza wartosc - nie wylapuje odpowienio kontaktu
+            if (abs(belka(Q,x)) < 1.044*eps)
 
                 if(last_trend_in ~= 0  && last_trend_in == -trend) || last_trend_in == 0
 
                     contact = 0;
-                    konto = 0
+                    konto = 0;
                     [abs((belka(Q,x))), last_trend_in, trend, (last_trend_in == -trend)];
                 end
             else
-                apply_force(h,-Q);
+                
+                
+                apply_force(h,-Q/force_scale);
             end
+            
 
             %F = 100;
             %wspornikowa
@@ -156,11 +176,14 @@ while toc < 120
 %Mg = Ra*x - F*(x-b);
 
           clf
-          plot(dx,w);
           hold on
+          plot(dx,w);
           plot(x,y,'o');
           %axis([-100,100,-100,100]) 
           axis([-0.02,0.08,-0.15,0.15]) 
+          axis square;
+          
+          text(dx(end) + 0.01,w(end), ['w = ',num2str(w(end)*1000), 'mm'],'FontSize',10);
           M(count)=getframe;
           count=count+1;
           yold = ynew;
