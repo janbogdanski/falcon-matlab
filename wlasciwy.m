@@ -183,11 +183,48 @@ while toc < 60
           axis([-0.02,0.08,-0.15,0.15]) 
           axis square;
           
+           %%dorysuj
+          
+          plot(dx(end-1), w(end-1),'o')
+plot(dx(end), w(end),'o')
+
+[A,B,C] = prosta(dx(end-1), w(end-1), dx(end),w(end));
+add = dx(end):0.001:l;
+plot(add, (-C/B - A/B*add));
+
+plot(dx, w,'o');
+
+
+%prostopadly
+    [A,B,C] = prosta(dx(1), w(1), dx(2),w(2));
+
+    d = (A^2 + B^2)^(1/2)
+    vector = [A,B]' /d * 0.0022
+    plot(dx(1)+vector(1), w(1)+vector(2),'or');
+for i = 2:length(dx)
+    
+    [A,B,C] = prosta(dx(i-1), w(i-1), dx(i),w(i));
+    add = dx(end):0.001:l;
+%plot(add, (-C/B - A/B*add));
+
+    vector = [A,B]';
+    d = (A^2 + B^2)^(1/2)
+    vector = [A,B]' /d * 0.0022
+    plot(dx(i)+vector(1), w(i)+vector(2),'o');
+end
+
+          
+          %dorysuj
+          
           text(dx(end) + 0.01,w(end), ['w = ',num2str(w(end)*1000), 'mm'],'FontSize',10);
           M(count)=getframe;
           count=count+1;
           yold = ynew;
           told = toc;
+          
+          
+          
+         
 end
           plot(dx,w);
           hold on
