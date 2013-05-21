@@ -37,7 +37,7 @@ last_trend_in = 0;
 force_scale = 4000; %tyle razy mniejsza sila generowana niz obliczona
 
 tic
-while toc < 15
+while toc < 25
     
     t = toc;
     pos = read_position(h);
@@ -144,6 +144,8 @@ while toc < 15
         end
 
 
+
+
     else
         contact = 0;
         last_trend_in = 0;
@@ -154,17 +156,35 @@ while toc < 15
     
           clf
           hold on
-          %plot(dx,w);
+          plot(dx,w);
+                  %dorysuj
+        
+
+
+
+
+
+%prostopadly
+  
+
+    [A,B,C] = prosta(dx(end-1), w(end-1), dx(end),w(end));
+    add = dx(end):0.001:l;
+    dx_ext = [dx,add];
+    w_ext = [w,(-C/B - A/B*add)];
+    plot(add, (-C/B - A/B*add));
+
+
           plot(x,y,'o');
           
           step = 0.001;
           da = 0:step:bok;
-Y = zeros(length(dx),length(da));
+          
+Y = zeros(length(dx_ext),length(da));
 for i=1:length(da)
-    Y(:,i) = w(:)  - da(i);
+    Y(:,i) = w_ext(:)  - da(i);
 end
 Y = Y';
-X = meshgrid(dx,da);
+X = meshgrid(dx_ext,da);
 [sizey,sizex] = size(X);
 if(sizex > 1 && sizey > 1 && length(X) == length(Y))
     color = zeros(sizey,sizex);
@@ -176,8 +196,12 @@ if(sizex > 1 && sizey > 1 && length(X) == length(Y))
             else
                 z = j - center;
             end
-            
-            color(j,i) = (1.5*sizex-i)*(1)*z;
+            if(i <= length(dx))
+                color(j,i) = (sizex-i)*(1)*z;
+            else
+                color(j,i) = 0;
+            end
+                
         end
     end
 
@@ -189,6 +213,7 @@ if(sizex > 1 && sizey > 1 && length(X) == length(Y))
     end
 
     surf(X,Y,color,'EdgeColor','none')
+    
 
 end
 
@@ -198,6 +223,7 @@ end
           axis square;
           
           text(dx(end) + 0.005,w(end), ['w = ',num2str(w(end)*1000), 'mm'],'FontSize',10);
+          text(dx_ext(end) + 0.005,w_ext(end)-0.005, ['wk = ',num2str(w_ext(end)*1000), 'mm'],'FontSize',10);
           %M(count)=getframe; %nie potrzebuje nagrywac
           %count=count+1;
           getframe;
