@@ -1,4 +1,6 @@
-matlabrc;clear;close all;clc
+matlabrc;
+%clear;
+close all;clc
 eps = 3e-3;
 
 
@@ -8,8 +10,8 @@ mesh = 0:0.001:l;
 E = 205000*10^6; %Pa
 
 q = 100; %N/m
-a = 0.005; %m - bok kwadratowej belki
-I = a^4/12; %m4
+bok = 0.01; %m - bok kwadratowej belki
+I = bok^4/12; %m4
 %I = 3.06/100000
 
 m = 0.1; %masa el ruchomego kg
@@ -35,7 +37,7 @@ last_Q = 0;
 force_scale = 4000; %tyle razy mniejsza sila generowana niz obliczona
 
 tic
-while toc < 60
+while toc < 15
     
     t = toc;
     pos = read_position(h);
@@ -177,23 +179,64 @@ while toc < 60
 
           clf
           hold on
-          plot(dx,w);
+          %plot(dx,w);
           plot(x,y,'o');
+          
+          step = 0.001;
+          da = 0:step:bok;
+Y = zeros(length(dx),length(da));
+for i=1:length(da)
+    Y(:,i) = w(:)  - da(i);
+end
+Y = Y';
+X = meshgrid(dx,da);
+[sizey,sizex] = size(X);
+if(sizex > 1 && sizey > 1 && length(X) == length(Y))
+    color = zeros(sizey,sizex);
+    center = (sizey)/2;
+    for i=1:sizex
+        for j=1:sizey
+            if j < center
+                z = center - j;
+            else
+                z = j - center;
+            end
+            
+            color(j,i) = (1.5*sizex-i)*(1)*z;
+        end
+    end
+
+    if w(end)~=0
+        
+        colormap(jet(ceil(abs(w(end)*1000))));
+    else
+        colormap(jet(2));
+    end
+%colormap('pink');
+    surf(X,Y,color,'EdgeColor','none')
+    %colorbar();
+
+end
+
+
           %axis([-100,100,-100,100]) 
-          axis([-0.02,0.08,-0.15,0.15]) 
+          %axis([-0.02,0.08,-0.15,0.15]) troche mala jeszcze
+          axis([-0.01,0.07,-0.06,0.06]) 
           axis square;
           
-          text(dx(end) + 0.01,w(end), ['w = ',num2str(w(end)*1000), 'mm'],'FontSize',10);
-          M(count)=getframe;
-          count=count+1;
+          text(dx(end) + 0.005,w(end), ['w = ',num2str(w(end)*1000), 'mm'],'FontSize',10);
+          %M(count)=getframe; %nie potrzebuje nagrywac
+          %count=count+1;
+          getframe;
+          
           yold = ynew;
           told = toc;
 end
-          plot(dx,w);
-          hold on
-          plot(x,y,'*');
+          %plot(dx,w);
+          %hold on
+          %plot(x,y,'*');
           %axis([-100,100,-100,100]) 
-          axis([-0.02,0.08,-0.15,0.15]) 
+          %axis([-0.02,0.08,-0.15,0.15]) 
           
 close(h);
 clear h
