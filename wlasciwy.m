@@ -17,7 +17,8 @@ I = bok^4/12; %m4
 m = 0.1; %masa el ruchomego kg
 
 F = 0;
-
+force_max_contact = 1;%N
+last_Qf = 0;
 
 h = haptikdevice;
 
@@ -33,7 +34,6 @@ contact = 0;
 trend = 0;
 trend_in = 0;
 last_trend_in = 0;
-last_Q = 0;
 force_scale = 4000; %tyle razy mniejsza sila generowana niz obliczona
 
 tic
@@ -100,6 +100,7 @@ while toc < 15
 
 
             Q = 3 * y * E*I / (x^3); % y => w, x => l
+            Qf = Q/force_scale;
             w = Q*dx.^3/(3*E*I);
             wprim = Q*dx.^2/(2*E*I);
             [Q, F toc];
@@ -123,9 +124,28 @@ while toc < 15
                     [abs((belka(Q,x))), last_trend_in, trend, (last_trend_in == -trend)];
                 end
             else
+                if((last_Qf - Qf) > force_max_contact)
+                    
+                    if abs(Qf) < 5
+                        f_step = Qf/10;
+                    elseif abs(Qf) < 10
+                         f_step = Qf/15;
+                    elseif abs(Qf) < 30
+                         f_step = Qf/40;
+                    else
+                         f_step = Qf/100;
+                    end
+
+                    %lagodny przebieg sily od 0 do Q co 0.05*1
+                    for f = 0:f_step:Qf
+                        apply_force(h,-f);
+                    end
+                    last_Qf = Qf;
+                else
+                    apply_force(h,-Qf);
+                    last_Qf = Qf;
+                end
                 
-                
-                apply_force(h,-Q/force_scale);
             end
             
 
