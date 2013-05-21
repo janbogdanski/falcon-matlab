@@ -75,8 +75,8 @@ while toc < 15
                 contact = 1;
                 trend_in = trend;
                 last_trend_in = trend;
-
             end
+        
         elseif (abs(y - belka(F,x)) > eps && (yold ~= 0) && y~=0 && (sign(yold) ~= sign(y))&& last_trend_in~=0) 
             %gdy duza predkosc, na razie slabe, bo zostaje w kontakcie po
             %obu stronach( na nowo lapie)
@@ -85,12 +85,6 @@ while toc < 15
             else
                 contact = 1;
             end
-            %contact = 1;
-            %trend_in = trend;
-            %last_trend_in = trend;
-            %[yold, y, abs(y - belka(F,x)), eps]
-            
-            %contact = 0;
         else
             %null;
         end
@@ -98,18 +92,11 @@ while toc < 15
 
         if(contact == 1)
 
-
             Q = 3 * y * E*I / (x^3); % y => w, x => l
             Qf = Q/force_scale;
             w = Q*dx.^3/(3*E*I);
             wprim = Q*dx.^2/(2*E*I);
-            [Q, F toc];
-            
-            
-
-
-            [sign(y) abs(belka(Q,x)), eps, x,Q];
-
+          
 
             %empirycznie dobrany wspolczynnik, > 1 zapobiega drganiom
             %manipulatora w okolicy pol rownowagi i zapewnia ciaglosc
@@ -124,6 +111,7 @@ while toc < 15
                     [abs((belka(Q,x))), last_trend_in, trend, (last_trend_in == -trend)];
                 end
             else
+
                 if((last_Qf - Qf) > force_max_contact)
                     
                     if abs(Qf) < 5
@@ -147,40 +135,14 @@ while toc < 15
                 end
                 
             end
-            
 
-            %F = 100;
-            %wspornikowa
-            %w = 5*F*l^2/(24*E*I) * dx.^2 -  F*l/(12*E*I) * dx.^3;
-
-            %wsp, sila na 'koncu'
-            %w = F*dx.^3/(3*E*I);
         else
             apply_force(h,0);
             elsekontakt = 0;
             dx = 0:0.001:l;
             w = dx *0;
         end
-%if length(w) >= 1
-%    last = w(end-1);
-%else
-%    last = w(end);
-%end
-%a =  (-1)*(w(end) - last / 0.1);
 
-%sizeMesh = length(mesh);
-%reszta = w(end) + a*(mesh(length(w):length(mesh))-length(w)*0.001);
-%w = [w, reszta]
-
-%reszta_dx = mesh(length(dx):length(mesh))
-%dx = [dx,reszta_dx]
-
-
-%dx liczony od zamocowania do miejsca dzialania sily
-%nalezy obliczyc kat stycznej i przedluzyc
-
-
-       % ret = [ret; [dy, dt, v, a, F, 0, x,y,z, w(end)]];
 
     else
         contact = 0;
@@ -190,17 +152,6 @@ while toc < 15
     end
 
     
-
-
-%Q - wartosc sily, obliczona na podstawie m*d2x/dt2 z falcona
-%b - punkt uderzenia w belke (belka jeset w srodku, roznica polozen )
-%x - zmienna od 0 - l
-
-%Rb = F*x/l;
-%Ra = F - Rb;
-
-%Mg = Ra*x - F*(x-b);
-
           clf
           hold on
           %plot(dx,w);
@@ -236,12 +187,10 @@ if(sizex > 1 && sizey > 1 && length(X) == length(Y))
     else
         colormap(jet(2));
     end
-%colormap('pink');
+
     surf(X,Y,color,'EdgeColor','none')
-    %colorbar();
 
 end
-
 
           %axis([-100,100,-100,100]) 
           %axis([-0.02,0.08,-0.15,0.15]) troche mala jeszcze
