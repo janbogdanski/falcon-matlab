@@ -77,10 +77,14 @@ while toc < 15
                 last_trend_in = trend;
 
             end
-        elseif (abs(y - belka(F,x)) > eps && (yold ~= 0) && y~=0 && (sign(yold) ~= sign(y)) && (contact == 0))
+        elseif (abs(y - belka(F,x)) > eps && (yold ~= 0) && y~=0 && (sign(yold) ~= sign(y))&& last_trend_in~=0) 
             %gdy duza predkosc, na razie slabe, bo zostaje w kontakcie po
             %obu stronach( na nowo lapie)
-            
+            if contact == 1
+                contact = 0;
+            else
+                contact = 1;
+            end
             %contact = 1;
             %trend_in = trend;
             %last_trend_in = trend;
