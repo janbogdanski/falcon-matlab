@@ -34,7 +34,7 @@ contact = 0;
 trend = 0;
 trend_in = 0;
 last_trend_in = 0;
-force_scale = 4000; %tyle razy mniejsza sila generowana niz obliczona
+force_scale = 10000; %tyle razy mniejsza sila generowana niz obliczona
 
 tic
 while toc < 25
@@ -54,7 +54,7 @@ while toc < 25
     y = pos(2) /1000;
     z = pos(3) /1000;
 
-    if (x < l) && (x > 0)
+    if (x < l) && (x > 0.03)
         %F = m * ((y - yold)/(toc - told) - yold)/(toc - told)
 
        dx = 0.0:.001:x; 
@@ -156,6 +156,7 @@ while toc < 25
 
 
     else
+        apply_force(h,0);
         contact = 0;
         last_trend_in = 0;
         dx = 0:0.001:l;
@@ -228,6 +229,7 @@ end
 
           %axis([-100,100,-100,100]) 
           %axis([-0.02,0.08,-0.15,0.15]) troche mala jeszcze
+          plot([0.03,0.03],[-1,1],'r'); %czerwona linia ograniczajaca
           axis([-0.01,0.07,-0.06,0.06]) 
           axis square;
           
