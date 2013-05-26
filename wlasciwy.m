@@ -39,6 +39,15 @@ force_scale = 4000; %tyle razy mniejsza sila generowana niz obliczona
 tic
 while toc < 25
     
+    button = read_button(h);
+    if button > 0 
+        contact = 0;
+        trend = 0;
+        trend_in = 0;
+        last_trend_in = 0;
+    end
+        
+    
     t = toc;
     pos = read_position(h);
     x = pos(1) /1000;
