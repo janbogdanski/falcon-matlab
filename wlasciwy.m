@@ -1,4 +1,15 @@
-%matlabrc;
+%Symulowanie ugiecia belki wspornikowej
+%
+%Praca przejsciowa magisterska
+%
+%Wydzial Mechaniczny Energetyki i Lotnictwa
+%Automatyka i Robotyka
+%
+%Autor: Jan Bogdanski janek.bogdanski@gmail.com
+%
+%aby pobrac skrypt wykonaj
+%git clone git@github.com:janbogdanski/falcon-matlab.git
+%
 clear;
 close all;clc
 eps = 3e-3;
