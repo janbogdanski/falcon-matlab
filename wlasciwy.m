@@ -166,7 +166,7 @@ while toc < 25
     
           clf
           hold on
-          plot(dx,w);
+          %plot(dx,w);
                   %dorysuj
         
 
@@ -181,7 +181,7 @@ while toc < 25
     add = dx(end):0.001:l;
     dx_ext = [dx,add];
     w_ext = [w,(-C/B - A/B*add)];
-    plot(add, (-C/B - A/B*add));
+   % plot(add, (-C/B - A/B*add));
 
 
           plot(x,y,'o');
@@ -230,11 +230,12 @@ end
           %axis([-100,100,-100,100]) 
           %axis([-0.02,0.08,-0.15,0.15]) troche mala jeszcze
           plot([0.03,0.03],[-1,1],'r'); %czerwona linia ograniczajaca
+          plot([0,0],[-0.015,0.005],'LineWidth',4,'Color','k') % 'zamocowanie'
           axis([-0.01,0.07,-0.06,0.06]) 
           axis square;
-          
-          text(dx(end) + 0.005,w(end), ['w = ',num2str(w(end)*1000), 'mm'],'FontSize',10);
-          text(dx_ext(end) + 0.005,w_ext(end)-0.005, ['wk = ',num2str(w_ext(end)*1000), 'mm'],'FontSize',10);
+          grid on
+          text(dx(end) + 0.005,w(end), ['w = ',num2str(w(end)), 'm'],'FontSize',10);
+          text(dx_ext(end) + 0.005,w_ext(end)-0.005, ['wk = ',num2str(ceil(w_ext(end)*1000)/1000), 'm'],'FontSize',10);
           %M(count)=getframe; %nie potrzebuje nagrywac
           %count=count+1;
           getframe;
