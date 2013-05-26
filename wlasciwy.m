@@ -1,5 +1,5 @@
-matlabrc;
-%clear;
+%matlabrc;
+clear;
 close all;clc
 eps = 3e-3;
 
